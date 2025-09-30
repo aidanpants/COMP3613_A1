@@ -26,7 +26,7 @@ def init():
 '''
 User Commands
 '''
-
+    
 user_cli = AppGroup('user', help='User object commands') 
 
 @user_cli.command("create", help="Creates a user")
