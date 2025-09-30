@@ -13,15 +13,21 @@ migrate = get_migrate(app)
 
 @app.cli.command("init", help="Creates and initializes the database")
 def init():
+    # Clear all tables if needed (optional)
+    db.drop_all()
+    db.create_all()
+
     user = User(username='jaden', password='jadenpass')
-    employer = Employer (employer_id='1', name='First Citezens Bank')
-    staff = Staff(name='Beatrix')   
+    employer = Employer(name='First Citezens Bank')
+    staff = Staff(name='Beatrix')
     student = Student(name='Bill')
-    position = Position(position_id='1', name="Intern", description="Internship position", employer_id =employer.employer_id)
-    shortlist = Shortlist(student_id=student.student_id, position_id=position.position_id, status='pending', staff_id=staff.staff_id)
+    position = Position(name="Intern", description="Internship position", employer=employer)
+    shortlist = Shortlist(student=student, position=position, status='pending', staff=staff)
+
     db.session.add_all([user, employer, staff, student, position, shortlist])
     db.session.commit()
-    print('database intialized')
+    print('Database initialized')
+
 
 '''
 User Commands
