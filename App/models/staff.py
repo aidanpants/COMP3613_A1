@@ -16,7 +16,6 @@ class Staff(db.Model):
         if not student or not position:
             raise ValueError("Student or Position not found")
 
-        # Create shortlist entry
         shortlist_entry = Shortlist(
             student_id = student.student_id,
             position_id = position.position_id,

@@ -14,10 +14,10 @@ migrate = get_migrate(app)
 @app.cli.command("init", help="Creates and initializes the database")
 def init():
     user = User(username='jaden', password='jadenpass')
-    employer = Employer (name='FCBbank')
-    staff = Staff(name='Beatrix')
+    employer = Employer (employer_id='1', name='First Citezens Bank')
+    staff = Staff(name='Beatrix')   
     student = Student(name='Bill')
-    position = Position(name="Intern", description="Internship position", employer_id =employer.employer_id)
+    position = Position(position_id='1', name="Intern", description="Internship position", employer_id =employer.employer_id)
     shortlist = Shortlist(student_id=student.student_id, position_id=position.position_id, status='pending', staff_id=staff.staff_id)
     db.session.add_all([user, employer, staff, student, position, shortlist])
     db.session.commit()
@@ -154,7 +154,7 @@ Student Commands
 @click.argument("student_id")
 def student_shortlist(student_id):
     """View all positions a student is shortlisted for, with employer response"""
-    student = Student.query.get(student_id)
+    student = Student.query.get(student_id) 
     if not student:
         print(f"Student with ID {student_id} not found")
         return

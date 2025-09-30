@@ -3,10 +3,9 @@ from App.models.position import Position
 
 class Employer(db.Model):
     __tablename__ = "employer"
-    employer_id = db.Column(db.Integer, primary_key=True)
+    employer_id = db.Column(db.String(20), primary_key=True)
     name = db.Column(db.String, nullable=False)
 
-    # Relationship: Employer creates multiple positions
     positions = db.relationship("Position", back_populates="employer")
 
 
